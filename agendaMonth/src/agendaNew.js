@@ -55,8 +55,7 @@ export default function agendaNew() {
       ano: Ano,
       created_at: currentDate,
 
-    }).then(res => {
-      //console.log(res.status);
+    }).then(res => {      
       setStatus(res.status);
       setMessage(res.data)
 
