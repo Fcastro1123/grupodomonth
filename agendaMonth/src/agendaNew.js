@@ -42,7 +42,6 @@ export default function agendaNew() {
   const setAgenda = useCallback(async () => {
 
     setIsLoading(true);
-    //console.log(data, horario, local, evento, contato, responsavel, valor, currentDate);
 
     axios.post(APP_API_BACKEND_AGENDAR, {
       data: dateFormated,
