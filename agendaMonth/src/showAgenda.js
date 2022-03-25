@@ -5,6 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { APP_API_BACKEND_GETSHOWAGENDA, APP_API_BACKEND_GETALLAGENDA } from './data/data';
 import axios from "axios";
 import { Divider } from 'react-native-paper';
+import Moment from 'moment';
 import { Frames } from 'frames-react-native';
 import { green700 } from 'react-native-paper';
 
@@ -76,9 +77,7 @@ export default function showAgenda({ navigation }) {
       case 12:
         setMes('Dezembro')
         break;
-    }
-
-    //const data = { 'mes':mes, 'ano':ano }; 
+        }
 
 
 
@@ -101,7 +100,8 @@ export default function showAgenda({ navigation }) {
     setListValues,
     setMessageError,
     setMes,
-    listValues,]);
+    listValues
+    ]);
 
 
   if (listValues != null) {
@@ -125,8 +125,8 @@ export default function showAgenda({ navigation }) {
                   <View style={{ flexDirection: 'row', }}>
 
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                      <Text style={{ height: 28, fontWeight: 'bold', fontSize: 20, color: '#fff' }}>{lista.data}</Text>
-                      <Text style={{ height: 20, fontSize: 18, color: '#fff' }}>{lista.horario}</Text>
+                      <Text style={{ height: 50, fontWeight: 'bold', fontSize: 40, color: '#fff', marginLeft: hp('2%') }}>{Moment(lista.data).format('DD')}</Text>
+                      <Text style={{ height: 20, fontSize: 18, color: '#fff', marginLeft: hp('2%') }}>{lista.horario}</Text>
 
                     </View>
 
@@ -135,7 +135,7 @@ export default function showAgenda({ navigation }) {
                       <Text style={{ height: 20, fontSize: 16, color: '#B8860B' }}>Evento: {lista.evento}</Text>
                       <Text style={{ height: 20, fontSize: 16, color: '#B8860B' }}>Contato: {lista.contato}</Text>
                       <Text style={{ height: 20, fontSize: 16, color: '#B8860B' }}>Responsavel: {lista.responsavel}</Text>
-                      <Text style={{ height: 20, fontSize: 16, color: '#B8860B' }}>Valor: {lista.valor}</Text>
+                      <Text style={{ height: 20, fontSize: 16, color: '#B8860B' }}>Valor: {`R$ ${lista.valor}`}</Text>
 
                     </View>
                   </View>

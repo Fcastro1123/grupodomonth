@@ -36,15 +36,15 @@ export default function agendaNew() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalSaveVisible, setModalSaveVisible] = useState(false);
   const [dateFormated, setDateFormated] = useState('');
+  const [dateMoment, setDateMoment] = useState('');
   const [mesSelected, setMesSelected] = useState('');
+  const [dateFormat, setDateFormat] = useState('');
 
-
-  const setAgenda = useCallback(async () => {
-
+  const tryLogin = () => {
     setIsLoading(true);
 
     axios.post(APP_API_BACKEND_AGENDAR, {
-      data: dateFormated,
+      data: dateMoment,
       horario: horario,
       evento: evento,
       local: local,
@@ -53,14 +53,18 @@ export default function agendaNew() {
       valor: valor,
       mes: mesSelected,
       ano: Ano,
-      created_at: currentDate,
+      created_at: dateFormat,
 
-    }).then(res => {      
+    }).then(res => {            
       setStatus(res.status);
       setMessage(res.data)
 
       if (status == 200) {
         setModalSaveVisible(true)
+        setIsLoading(false);
+      }
+      else{
+        setModalVisible(true)
         setIsLoading(false);
       }
 
@@ -70,28 +74,75 @@ export default function agendaNew() {
         setMessageError(err);
         console.log(messageerror);
         setIsLoading(false);
-      })
+      })    
 
-  }, [setIsLoading, setModalSaveVisible]);
+
+    setIsLoading(false);
+
+
+}
+
+
+  // const setAgenda = useCallback(async () => {
+
+  //   setIsLoading(true);
+
+  //   axios.post(APP_API_BACKEND_AGENDAR, {
+  //     data: dateMoment,
+  //     horario: horario,
+  //     evento: evento,
+  //     local: local,
+  //     contato: contato,
+  //     responsavel: responsavel,
+  //     valor: valor,
+  //     mes: mesSelected,
+  //     ano: Ano,
+  //     created_at: currentDate,
+
+  //   }).then(res => {      
+  //     setStatus(res.status);
+  //     setMessage(res.data)
+
+  //     if (status == 200) {
+  //       setModalSaveVisible(true)
+  //       setIsLoading(false);
+  //     }
+
+
+  //   })
+  //     .catch(err => {
+  //       setMessageError(err);
+  //       console.log(messageerror);
+  //       setIsLoading(false);
+  //     })
+
+
+  // }, [horario,
+  //   evento,
+  //   local,
+  //   contato,
+  //   responsavel,
+  //   valor,
+  //   Ano,
+  // ]);
 
 
 
   useEffect(() => {
-    var date = new Date().getDate();
-    var mes = new Date().getMonth() + 1;
-    var ano = new Date().getFullYear();
-    var hours = new Date().getHours() - 4;
-    var min = new Date().getMinutes();
-    var sec = new Date().getSeconds();
+    var date = new Date();
+    setDateFormat(Moment(date).format('DD-MM-YYYY'))     
+     
+    
 
-    setCurrentDate(date + '/' + mes + '/' + ano + ' ' + hours + ':' + min);
-
-
-  }, [setCurrentDate,
-    setAno,
-    setAgenda,
+  }, [setDateFormat,    
     setIsLoading,
+    setModalSaveVisible,
+    setModalVisible,
+    currentDate,
+    modalSaveVisible,
+    modalVisible,
     dateFormated,
+    dateMoment,
     mesSelected,
     horario,
     evento,
@@ -117,15 +168,12 @@ export default function agendaNew() {
             onDayPress={day => {
               const date = Moment(day.dateString).format('DD-MM-YYYY')
               setDateFormated(date);
+              setDateMoment(day.dateString)
+              setMesSelected(day.month);
+              setAno(day.year);
+              
 
-            }}
-            onMonthChange={mes => {
-              //console.log('month changed', month);
-              const mesSelect = mes.month;
-              const anoSelect = mes.year;
-              setMesSelected(mesSelect);
-              setAno(anoSelect);
-            }}
+            }}            
             // markedDates={{
             //   '2022-03-16': {selected: true, marked: true, selectedColor: 'green'},
             //   '2022-03-18': {selected: true, marked: true, selectedColor: 'green'},
@@ -207,7 +255,7 @@ export default function agendaNew() {
 
         </View>
 
-        <TouchableOpacity onPress={setAgenda} style={{ padding: hp('2%'), marginTop: hp('15%'), marginLeft: hp('3%'), backgroundColor: '#000', width: wp('90%'), alignItems: 'center', borderRadius: hp('10%') }}>
+        <TouchableOpacity onPress={tryLogin} style={{ padding: hp('2%'), marginTop: hp('15%'), marginLeft: hp('3%'), backgroundColor: '#000', width: wp('90%'), alignItems: 'center', borderRadius: hp('10%') }}>
           <Text style={{ color: '#B8860B', fontSize: 22 }} >Marcar</Text>
         </TouchableOpacity>
 
@@ -225,7 +273,7 @@ export default function agendaNew() {
 
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Preencher todos os dados!!!</Text>
+                <Text style={styles.modalText}>{message}</Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(!modalVisible)}>

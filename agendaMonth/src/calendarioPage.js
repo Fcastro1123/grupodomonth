@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { CalendarList, Calendar, Agenda, LocaleConfig } from 'react-native-calendars';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { APP_API_BACKEND_GETALLAGENDA } from './data/data';
 import axios from "axios";
 import { Frames } from "frames-react-native";
+import Moment from 'moment';
 //import { shallowEqual, useSelector } from 'react-redux'
 
 LocaleConfig.locales['br'] = {
@@ -22,50 +23,36 @@ export default function calendarioPage({ navigation }) {
   const [currentDate, setCurrentDate] = useState('');
   const [mes, setMes] = useState();
   const [dateString, setDateString] = useState();
+  const [markDay, setMarkDay] = useState();
 
-  //const calendar = useSelector((state) => state.calendarClasses.calendar);
 
   let markedDay = {};
 
   const maia = { key: 'maia', color: 'red', selectedDotColor: 'white' };
   const Crossfit = { key: 'Crossfit', color: 'blue', selectedDotColor: 'white' };
 
-  useEffect(() => {
-    //console.log('Caiu no useEffect...')
-    var date = new Date().getDate();
-    var Mes = new Date().getMonth() + 1;
-    var Ano = new Date().getFullYear();
-    var hours = new Date().getHours() - 4;
-    var min = new Date().getMinutes();
-    var sec = new Date().getSeconds();
-
-    setCurrentDate(date + '/' + Mes + '/' + Ano
-      + ' ' + hours + ':' + min + ':' + sec);
-
-    var createdAt = currentDate;  
-
-
-    axios.get(APP_API_BACKEND_GETALLAGENDA).then(res => {
-      setListAllValues(res.data);
-      //console.log(listAllValues); 
-    })
+  const getAgenda = useCallback(async () => {
+    axios.get(APP_API_BACKEND_GETALLAGENDA)
+      .then(res => {
+        setListAllValues(res.data);        
+      })
       .catch(error => {
         setMessageError('Erro no retorno dos dados...', error);
-        //console.log("erro no retorno dos ", err);
-        //console.log(userAuth.clientID);
       })
 
-    listAllValues.map((item) => {
-      markedDay[item.data] = {
-        selected: true,
-        marked: true,
-        selectedColor: "purple",
-      };
-    });
+      listAllValues.map((item) => {
+        markedDay[Moment(item.data).format('YYYY-MM-DD')] = { selected: true, selectedColor: "green" };
+  
+        setMarkDay(markedDay)      
+      });
 
-    //console.log(dateString)
+  }, [listAllValues, markedDay])
 
-  }, [setCurrentDate, setListAllValues, setMessageError, dateString]);
+
+  useEffect(() => {
+    getAgenda()
+
+  }, [getAgenda, setMessageError, dateString]);
 
   return (
     <View style={styles.container}>
@@ -91,13 +78,19 @@ export default function calendarioPage({ navigation }) {
               <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>27/03 - GumasBar - 18:00hs </Text>
               <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>29/03 - Aniversário Mariane </Text> */}
 
-
+          {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>01/04 - Festa Luciano Suzano - 20hs </Text> */}
           {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>02/04 - Village do Lago - 14hs </Text> */}
           {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>02/04 - Fazenda São João - 19hs </Text> */}
+          {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>03/04 - Gumas Bar - 18hs </Text> */}
           {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>05/04 - Rancho do cartório - Definir horário </Text> */}
+          {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>09/04 - Definir - Definir </Text> */}
+          {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>10/04 - Gumas Bar - 18hs </Text> */}
           {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>16/04 - Feijoada do Maloca - 15hs </Text> */}
           {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>16/04 - Festa Formatura - 19hs </Text> */}
           {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>17/04 - Aniversário - 12hs </Text> */}
+          {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>17/04 - Gumas Bar - 18hs </Text> */}
+          {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>21/04 - Aniversário - 12hs </Text> */}
+          {/* <Text style={{ height: 25, fontSize: 16, color: '#B8860B' }}>24/04 - Gumas Bar - 18hs </Text> */}
 
 
 
@@ -126,7 +119,7 @@ export default function calendarioPage({ navigation }) {
       {/* <Divider style={styles.dividerStyle} /> */}
       <View style={styles.calendarView}>
         <Calendar
-          onDayPress={day => {            
+          onDayPress={day => {
             setDateString(day.dateString);
             //console.log(dateString);
           }}
@@ -135,12 +128,12 @@ export default function calendarioPage({ navigation }) {
             setMes(month.month)
             //console.log(mes)
           }}
-          markedDates={{
-            '2022-03-16': {selected: true, marked: true, selectedColor: 'green'},
-            '2022-03-18': {selected: true, marked: true, selectedColor: 'green'},
-            
-          }}
-         
+          markedDates={markDay}
+
+          //markedDates={{"2022-03-20":{selected:true, selectedColor:'green',} }}
+
+
+
           // Agenda container style
           style={styles.calendar}
         />
