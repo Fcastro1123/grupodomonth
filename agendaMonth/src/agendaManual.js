@@ -29,16 +29,17 @@ export default function agendaManual({ navigation }) {
 
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>01/04 - Festa Luciano Suzano - 20hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>02/04 - Village do Lago - 14hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>02/04 - Fazenda São João - 19hs </Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>02/04 - Recanto das Palmeiras - 18hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>03/04 - Gumas Bar - 18hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>05/04 - Rancho do cartório - Definir horário </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>09/04 - Definir - Definir </Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>09/04 - Recanto das Palmeiras - 13hs </Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>09/04 - Vila Romana - 22hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>10/04 - Gumas Bar - 18hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>16/04 - Feijoada do Maloca Suzano - 15hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>16/04 - Festa Formatura - 19hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>17/04 - Aniversário - 12hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>17/04 - Gumas Bar - 18hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>21/04 - Aniversário - 12hs </Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>23/04 - Resenha do Paulão - 17hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>24/04 - Gumas Bar - 18hs </Text>
 
 
