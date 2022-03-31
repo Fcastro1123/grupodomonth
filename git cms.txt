@@ -1,0 +1,14 @@
+git remote add origin https://github.com/Fcastro1123/projetos.git
+
+git config --global user.email "fabiano.castro12@globomail.com"
+
+git remote add origin https://github.com/Fcastro1123/grupodomonth.git
+
+
+git rm --cached grupodomonth -f
+
+git push --set-upstream origin master
+
+git config --global http.sslVerify false
+
+
