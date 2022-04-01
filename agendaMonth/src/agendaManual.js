@@ -27,8 +27,8 @@ export default function agendaManual({ navigation }) {
                     <Frames style={{ justifyContent: 'center', opacity:hp('0.5%'), backgroundColor:'#1C1C1C', borderRadius: 15, padding: 10, width: wp('95%')}}>
 
 
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>01/04 - Festa Luciano Suzano - 20hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>02/04 - Village do Lago - 14hs </Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>01/04 - Festa Luciano Suzano - 20hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>02/04 - Village do Lago - 14hs</Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>02/04 - Recanto das Palmeiras - 18hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>03/04 - Gumas Bar - 18hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>09/04 - Recanto das Palmeiras - 13hs </Text>
