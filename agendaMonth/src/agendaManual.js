@@ -40,7 +40,7 @@ export default function agendaManual({ navigation }) {
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>17/04 - Gumas Bar - 18hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>21/04 - Aniversário - 12hs </Text>
                         <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>23/04 - Resenha do Paulão - 17hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>24/04 - Gumas Bar - 18hs </Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>24/04 - Gumas Bar - 18hs</Text>
 
 
 
