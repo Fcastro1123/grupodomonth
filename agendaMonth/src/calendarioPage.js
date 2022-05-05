@@ -40,22 +40,23 @@ export default function calendarioPage({ navigation }) {
   }, [setListAllValues, setMarkDay, setMessageError])
 
   useEffect(() => {
-    // axios.get(APP_API_BACKEND_GETALLAGENDA)
-    //   .then(res => {
-    //     setListAllValues(res.data);
-    //   })
-    //   .catch(error => {
-    //     setMessageError('Erro no retorno dos dados...', error);
-    //   })
+    axios.get(APP_API_BACKEND_GETALLAGENDA)
+      .then(res => {
+        setListAllValues(res.data);
+      })
+      .catch(error => {
+        setMessageError('Erro no retorno dos dados...', error);
+      })
 
-    // listAllValues.map((item) => {
-    //   markedDay[Moment(item.data).format('YYYY-MM-DD')] = { selected: true, selectedColor: "green" };
+    listAllValues.map((item) => {
+      markedDay[Moment(item.data).format('YYYY-MM-DD')] = { selected: true, selectedColor: "green" };
 
-    //   setMarkDay(markedDay)
-    // });
+      setMarkDay(markedDay)
+    });
 
-    getAgenda()
-  }, [getAgenda]);
+    //getAgenda()
+    
+  }, [setListAllValues, markedDay]);
 
   return (
     <View style={styles.container}>

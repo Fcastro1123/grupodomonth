@@ -4,6 +4,8 @@ git config --global user.email "fabiano.castro12@globomail.com"
 
 git remote add origin https://github.com/Fcastro1123/grupodomonth.git
 
+git config --global user.name "Fcastro1123"
+
 
 git rm --cached grupodomonth -f
 

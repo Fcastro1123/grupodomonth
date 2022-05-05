@@ -42,7 +42,8 @@
     "react-redux": "^7.2.6",
     "sequelize": "^6.8.0",
     "sequelize-ssh-tunnel": "git+https://bitbucket.org/freshrealm/sequelize-ssh-tunnel.git",
-    "tunnel-ssh": "^4.1.6"
+    "tunnel-ssh": "^4.1.6",
+    "expo-updates": "~0.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

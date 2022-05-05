@@ -18,8 +18,8 @@ export default function agendaManual({ navigation }) {
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/novo.png')} style={styles.imageView} />
 
-                <View style={{ backgroundColor: '#000', width: wp('95%'), height: hp('4%'), alignItems: 'center', borderRadius: 5, marginTop: hp('-20%') }}>
-                    <Text style={{ color: '#B8860B', fontSize: 24 }}>Abril</Text>
+                <View style={{ backgroundColor: '#000', width: wp('95%'), height: hp('5%'), alignItems: 'center', borderRadius: 5, marginTop: hp('-20%') }}>
+                    <Text style={{ color: '#B8860B', fontSize: 24 }}>Maio</Text>
                 </View>
 
                 <View style={{marginTop: hp('1%') }}>
@@ -27,20 +27,17 @@ export default function agendaManual({ navigation }) {
                     <Frames style={{ justifyContent: 'center', opacity:hp('0.5%'), backgroundColor:'#1C1C1C', borderRadius: 15, padding: 10, width: wp('95%')}}>
 
 
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>01/04 - Festa Luciano Suzano - 20hs</Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>02/04 - Village do Lago - 14hs</Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>02/04 - Recanto das Palmeiras - 18hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>03/04 - Gumas Bar - 18hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>09/04 - Recanto das Palmeiras - 13hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>09/04 - Vila Romana - 22hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>10/04 - Gumas Bar - 18hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>16/04 - Feijoada do Maloca Suzano - 15hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>16/04 - Festa Formatura - 19hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>17/04 - Aniversário - 12hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>17/04 - Gumas Bar - 18hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>21/04 - Aniversário - 12hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>23/04 - Resenha do Paulão - 17hs </Text>
-                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>24/04 - Gumas Bar - 18hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>01/05 - Gumas Bar - 18hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>06/05 - Vapt-Vupt - 20hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>07/05 - Água Clara - 18hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>08/05 - Gumas Bar - 18hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>15/05 - Gumas Bar - 18hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>20/05 - Vapt-Vupt - 20hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>21/05 - Boteco do Netinho - 20hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>22/05 - Gumas Bar - 18hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>28/05 - Vapt-Vupt - 20hs</Text>
+                        <Text style={{ height: 25, fontSize: 18, color: '#B8860B' }}>29/05 - Gumas Bar - 18hs</Text>
+
 
 
 
