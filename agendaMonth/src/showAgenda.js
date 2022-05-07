@@ -86,7 +86,7 @@ export default function showAgenda({ navigation }) {
       ano: Ano
     }).then(res => {
       setListValues(res.data);
-      //console.log(listValues);           
+                 
     })
       .catch(error => {
         setMessageError('Erro no retorno dos dados...', error);
@@ -108,7 +108,7 @@ export default function showAgenda({ navigation }) {
     return (
       <View style={styles.container}>
         <View style={styles.container}>
-          <ImageBackground source={require('../assets/month_agua.jpeg')} style={styles.imageView} />
+          <ImageBackground source={require('../assets/MonthNova.jpg')} style={styles.imageView} />
         </View>
 
         <View style={{ backgroundColor: '#000', width: wp('95%'), height:hp('4%'), alignItems: 'center', borderRadius: 5, marginTop: hp('-19%') }}>

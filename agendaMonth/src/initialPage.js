@@ -69,7 +69,7 @@ const InitialPage = ({ route, navigation }) => {
                         <Text style={{color: focused ? 'black' : 'lightgray', fontSize: 12}}>Calendário</Text>
                     </View>
                 )  }} />
-                <Tab.Screen name="Manual" component={agendaManual} options={{ headerShown: false, 
+                {/* <Tab.Screen name="Manual" component={agendaManual} options={{ headerShown: false, 
                 tabBarIcon:({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center'}}>
                         <ImageBackground 
@@ -85,7 +85,7 @@ const InitialPage = ({ route, navigation }) => {
                         />
                         <Text style={{color: focused ? 'black' : 'lightgray', fontSize: 12}}>Manual</Text>
                     </View>
-                )  }} />
+                )  }} /> */}
                 <Tab.Screen name="Marcar" component={agendaNew} options={{ headerShown: false, 
                 tabBarIcon:({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center'}}>

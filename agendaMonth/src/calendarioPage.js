@@ -16,29 +16,8 @@ export default function calendarioPage({ navigation }) {
   const [dateString, setDateString] = useState();
   const [markDay, setMarkDay] = useState();
 
-
   let markedDay = {};
-
-  const maia = { key: 'maia', color: 'red', selectedDotColor: 'white' };
-  const Crossfit = { key: 'Crossfit', color: 'blue', selectedDotColor: 'white' };
-
-  const getAgenda = useCallback(async () => {
-    axios.get(APP_API_BACKEND_GETALLAGENDA)
-      .then(res => {
-        setListAllValues(res.data);        
-      })
-      .catch(error => {
-        setMessageError('Erro no retorno dos dados...', error);
-      })
-
-      listAllValues.map((item) => {
-        markedDay[Moment(item.data).format('YYYY-MM-DD')] = { selected: true, selectedColor: "green" };
-
-        setMarkDay(markedDay)      
-      });
-
-  }, [setListAllValues, setMarkDay, setMessageError])
-
+  
   useEffect(() => {
     axios.get(APP_API_BACKEND_GETALLAGENDA)
       .then(res => {
@@ -56,12 +35,12 @@ export default function calendarioPage({ navigation }) {
 
     //getAgenda()
     
-  }, [setListAllValues, markedDay]);
+  }, [listAllValues, setMarkDay]);
 
   return (
     <View style={styles.container}>
       <View style={styles.container}>
-        <ImageBackground source={require('../assets/month_agua.jpeg')} style={styles.imageView} />
+        <ImageBackground source={require('../assets/MonthNova.jpg')} style={styles.imageView} />
 
         <View style={{ marginLeft: hp('-1.5%'), marginTop: hp('1%') }}>
 
