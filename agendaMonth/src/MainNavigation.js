@@ -14,8 +14,8 @@ const Stack = createStackNavigator();
 export default () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="loginPage">
-        <Stack.Screen name="loginPage" component={loginPage} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="InitialPage">
+        {/* <Stack.Screen name="loginPage" component={loginPage} options={{ headerShown: false }} /> */}
         <Stack.Screen name="InitialPage" component={InitialPage} options={{ headerShown: false }} />
         <Stack.Screen name="agendaNew" component={agendaNew} options={{ headerShown: false }} />
       </Stack.Navigator>
