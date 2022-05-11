@@ -24,6 +24,8 @@ export default function showAgenda({ navigation }) {
   const [messageerror, setMessageError] = useState();
   const [currentDate, setCurrentDate] = useState('');
   const [mes, setMes] = useState();
+  const [sortListValues, setSortListValues] = useState([]);
+
 
   const maia = { key: 'maia', color: 'red', selectedDotColor: 'white' };
   const Crossfit = { key: 'Crossfit', color: 'blue', selectedDotColor: 'white' };
@@ -86,6 +88,17 @@ export default function showAgenda({ navigation }) {
       ano: Ano
     }).then(res => {
       setListValues(res.data);
+
+      if (listValues != undefined && listValues.length > 0){
+        let sortedAsceding = listValues.sort((a, b) => {return a.data > b.data;})
+
+        setSortListValues(sortedAsceding)
+
+        
+      }
+
+      //console.log(sortListValues)
+
                  
     })
       .catch(error => {
@@ -98,13 +111,15 @@ export default function showAgenda({ navigation }) {
 
   }, [setCurrentDate,
     setListValues,
+    //setSortListValues,
     setMessageError,
     setMes,
-    listValues
+    listValues,
+    //sortListValues
     ]);
 
 
-  if (listValues != null) {
+  if (listValues != null && listValues.length > 0) {
     return (
       <View style={styles.container}>
         <View style={styles.container}>
@@ -120,7 +135,7 @@ export default function showAgenda({ navigation }) {
         <View style={{ flex: 1, width: wp('95%'), marginTop: hp('1%') }}>
           <ScrollView>
             <View style={{ backgroundColor: '#1C1C1C', padding: 10, margin: 5, borderRadius: 10, elevation: 1 }}>
-              {listValues.map(lista => (
+              {sortListValues.map(lista => (
                 <View style={{ paddingTop: 10 }}>
                   <View style={{ flexDirection: 'row', }}>
 

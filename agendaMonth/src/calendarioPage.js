@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
-import { CalendarList, Calendar, Agenda, LocaleConfig } from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { APP_API_BACKEND_GETALLAGENDA } from './data/data';
 import axios from "axios";
-import { Frames } from "frames-react-native";
 import Moment from 'moment';
 
 export default function calendarioPage({ navigation }) {
@@ -15,9 +14,27 @@ export default function calendarioPage({ navigation }) {
   const [mes, setMes] = useState();
   const [dateString, setDateString] = useState();
   const [markDay, setMarkDay] = useState();
+  const [dateFilter, setDateFilter] = useState([]);
 
   let markedDay = {};
-  
+
+  const values = useCallback(async () => {
+    let filterAgenda = [];
+
+    if (listAllValues != undefined) {
+      listAllValues.map((item) => {
+        if (item.data == dateString) {
+          filterAgenda.push(item)
+        }
+
+        let sortedAsc = filterAgenda.sort((a, b) => {return a.data > b.data;})
+
+        setDateFilter(sortedAsc);
+
+      });
+    }
+  }, [setDateFilter, listAllValues])
+
   useEffect(() => {
     axios.get(APP_API_BACKEND_GETALLAGENDA)
       .then(res => {
@@ -33,34 +50,42 @@ export default function calendarioPage({ navigation }) {
       setMarkDay(markedDay)
     });
 
-    //getAgenda()
-    
-  }, [listAllValues, setMarkDay]);
+    values();
+
+  }, [listAllValues, setListAllValues, setMarkDay, setDateString, values]);
 
   return (
     <View style={styles.container}>
       <View style={styles.container}>
         <ImageBackground source={require('../assets/MonthNova.jpg')} style={styles.imageView} />
-
-        <View style={{ marginLeft: hp('-1.5%'), marginTop: hp('1%') }}>
-
-        </View>
       </View>
-      
+
       <View style={styles.calendarView}>
         <Calendar
           onDayPress={day => {
             setDateString(day.dateString);
-           
+
           }}
-          onMonthChange={month => {            
+          onMonthChange={month => {
             setMes(month.month)
-           
+
           }}
           markedDates={markDay}
 
           style={styles.calendar}
         />
+
+        {dateFilter != undefined && dateFilter.length > 0 ?
+          dateFilter.map((lista) => (
+            <>
+              <View style={{ backgroundColor: '#D3D3D3', width: wp('90%'), height: hp('5%'), borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginTop: hp('1%') }}>
+                <Text style={{ fontSize: 16 }}>{Moment(lista.data).format('DD/MM')} - {lista.local} - {lista.horario}</Text>
+              </View>
+            </>
+          ))
+          :
+          null
+        }
 
       </View>
 
@@ -83,7 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     width: wp('97%'),
     borderRadius: 20,
-    marginTop: hp('-15%')
+    marginTop: hp('-33%')
   },
   calendar: {
     width: wp('97%'),
