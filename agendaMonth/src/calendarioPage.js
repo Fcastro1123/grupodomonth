@@ -68,6 +68,8 @@ export default function calendarioPage({ navigation }) {
           }}
           onMonthChange={month => {
             setMes(month.month)
+            setDateFilter(undefined);
+            setDateString('');            
 
           }}
           markedDates={markDay}

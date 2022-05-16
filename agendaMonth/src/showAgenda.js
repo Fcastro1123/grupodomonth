@@ -8,6 +8,7 @@ import { Divider } from 'react-native-paper';
 import Moment from 'moment';
 import { Frames } from 'frames-react-native';
 import { green700 } from 'react-native-paper';
+import {useNetInfo} from '@react-native-community/netinfo';
 
 
 LocaleConfig.locales['br'] = {
@@ -25,10 +26,9 @@ export default function showAgenda({ navigation }) {
   const [currentDate, setCurrentDate] = useState('');
   const [mes, setMes] = useState();
   const [sortListValues, setSortListValues] = useState([]);
-
-
-  const maia = { key: 'maia', color: 'red', selectedDotColor: 'white' };
-  const Crossfit = { key: 'Crossfit', color: 'blue', selectedDotColor: 'white' };
+  const [sumValue, setSumValue] = useState('');
+  let filterValor = [];
+  const netinfo = useNetInfo();
 
   useEffect(() => {
     //console.log('Caiu no useEffect...')
@@ -79,7 +79,7 @@ export default function showAgenda({ navigation }) {
       case 12:
         setMes('Dezembro')
         break;
-        }
+    }
 
 
 
@@ -89,25 +89,38 @@ export default function showAgenda({ navigation }) {
     }).then(res => {
       setListValues(res.data);
 
-      if (listValues != undefined && listValues.length > 0){
-        let sortedAsceding = listValues.sort((a, b) => {return a.data > b.data;})
+      if (listValues != undefined && listValues.length > 0) {
+        let sortedAsceding = listValues.sort((a, b) => { return a.data > b.data; })
 
         setSortListValues(sortedAsceding)
 
+        listValues.map((item) => {
+          filterValor.push(item.valor)
+
+        });
+
+        const values = filterValor.map((n) => {
+          return parseInt(n, 10);
+        });
+
+        const total = values.reduce((total, currentElement) => total + currentElement)
+
+        const formatado = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        //console.log(formatado)
+
+
+        setSumValue(total);
         
       }
 
-      //console.log(sortListValues)
-
-                 
     })
       .catch(error => {
         setMessageError('Erro no retorno dos dados...', error);
         //console.log("erro no retorno dos ", err);
         //console.log(userAuth.clientID);
-      })
-
-
+      }
+      )    
 
   }, [setCurrentDate,
     setListValues,
@@ -115,24 +128,35 @@ export default function showAgenda({ navigation }) {
     setMessageError,
     setMes,
     listValues,
-    //sortListValues
-    ]);
+    setSumValue
+  ]);
 
 
   if (listValues != null && listValues.length > 0) {
     return (
-      <View style={styles.container}>
-        <View style={styles.container}>
+      <View style={styles.container}>       
+
+        <View style={{marginTop: hp('0%')}}>
           <ImageBackground source={require('../assets/MonthNova.jpg')} style={styles.imageView} />
-        </View>
+        </View> 
 
-        <View style={{ backgroundColor: '#000', width: wp('95%'), height:hp('4%'), alignItems: 'center', borderRadius: 5, marginTop: hp('-19%') }}>
+        <View style={{width: wp('2%'), 
+                      height: hp('2%'),
+                      marginTop: hp('-33%'),
+                      marginLeft: hp('-53%'),
+                      backgroundColor: netinfo.isConnected ? 'green' : 'red'}}>
+        </View>       
+
+        <View style={{ backgroundColor: '#000', width: wp('95%'), height: hp('10%'), alignItems: 'center', borderRadius: 5, marginTop: hp('23%') }}>
           <Text style={{ color: '#B8860B', fontSize: hp('3%') }}>{mes}</Text>
+          <Divider style={styles.dividerMesStyle} />
+          <Text style={{ color: '#B8860B', fontSize: hp('2%'), marginLeft: hp('-40%'), marginTop: hp('1%') }}>Total: {listValues.length}</Text>
+          <Text style={{ color: '#B8860B', fontSize: hp('2%'), marginLeft: hp('35%'), marginTop: hp('-3%') }}>Renda: {sumValue}</Text>
+
+
         </View>
 
-
-
-        <View style={{ flex: 1, width: wp('95%'), marginTop: hp('1%') }}>
+        <View style={{ flex: 1, width: wp('95%'), marginTop: hp('0%') }}>
           <ScrollView>
             <View style={{ backgroundColor: '#1C1C1C', padding: 10, margin: 5, borderRadius: 10, elevation: 1 }}>
               {sortListValues.map(lista => (
@@ -194,7 +218,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#363636',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'   
 
   },
   calendarView: {
@@ -238,6 +262,13 @@ const styles = StyleSheet.create({
     padding: 1,
     marginTop: hp('1%'),
     backgroundColor: '#B8860B'
+
+  },
+  dividerMesStyle: {
+    padding: 1,
+    marginTop: hp('1%'),
+    backgroundColor: '#B8860B',
+    width: wp('90%'),
 
   },
 

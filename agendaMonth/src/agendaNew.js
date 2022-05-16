@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { TouchableOpacity, StyleSheet, Text, View, Alert, ImageBackground, TextInput, ActivityIndicator, Modal, Pressable, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { CalendarList, Calendar, LocaleConfig } from 'react-native-calendars';
@@ -9,7 +9,7 @@ import axios from "axios";
 import Moment from 'moment';
 
 LocaleConfig.locales['br'] = {
-  monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezambro'],
+  monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
   monthNamesShort: ['Jan.', 'Fev.', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul.', 'Ago', 'Set.', 'Out.', 'Nov.', 'Dez.'],
   dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
   dayNamesShort: ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sab.']
@@ -40,7 +40,20 @@ export default function agendaNew() {
   const [mesSelected, setMesSelected] = useState('');
   const [dateFormat, setDateFormat] = useState('');
 
-  const tryLogin = () => {
+  const ref_input2 = useRef();
+  const ref_input3 = useRef();
+  const ref_input4 = useRef();
+  const ref_input5 = useRef();
+  const ref_input6 = useRef();
+  const ref_input7 = useRef();
+
+  const trySave = () => {
+    if (!dateMoment.trim() || !horario.trim() || !evento.trim() || !local.trim() || !contato.trim() || !responsavel.trim() || !valor.trim()) {
+      setMessage('Todos os campos são obrigatórios!!!')
+      setModalVisible(true)
+      
+      return
+    }
     setIsLoading(true);
 
     axios.post(APP_API_BACKEND_AGENDAR, {
@@ -79,53 +92,7 @@ export default function agendaNew() {
 
     setIsLoading(false);
 
-
-}
-
-
-  // const setAgenda = useCallback(async () => {
-
-  //   setIsLoading(true);
-
-  //   axios.post(APP_API_BACKEND_AGENDAR, {
-  //     data: dateMoment,
-  //     horario: horario,
-  //     evento: evento,
-  //     local: local,
-  //     contato: contato,
-  //     responsavel: responsavel,
-  //     valor: valor,
-  //     mes: mesSelected,
-  //     ano: Ano,
-  //     created_at: currentDate,
-
-  //   }).then(res => {      
-  //     setStatus(res.status);
-  //     setMessage(res.data)
-
-  //     if (status == 200) {
-  //       setModalSaveVisible(true)
-  //       setIsLoading(false);
-  //     }
-
-
-  //   })
-  //     .catch(err => {
-  //       setMessageError(err);
-  //       console.log(messageerror);
-  //       setIsLoading(false);
-  //     })
-
-
-  // }, [horario,
-  //   evento,
-  //   local,
-  //   contato,
-  //   responsavel,
-  //   valor,
-  //   Ano,
-  // ]);
-
+} 
 
 
   useEffect(() => {
@@ -154,14 +121,8 @@ export default function agendaNew() {
 
   ]);
 
-
-
-
   return (
-    <View style={styles.container}>
-      {/* <View>
-        <ImageBackground source={require('../assets/grupo.jpg')} style={styles.imageView} />
-      </View> */}
+    <View style={styles.container}>      
       <ScrollView>
         <View style={styles.calendarView}>
           <Calendar
@@ -170,17 +131,10 @@ export default function agendaNew() {
               setDateFormated(date);
               setDateMoment(day.dateString)
               setMesSelected(day.month);
-              setAno(day.year);
-              
+              setAno(day.year);              
 
             }}            
-            // markedDates={{
-            //   '2022-03-16': {selected: true, marked: true, selectedColor: 'green'},
-            //   '2022-03-18': {selected: true, marked: true, selectedColor: 'green'},
-
-            // }}
-
-            // Agenda container style
+            
             style={styles.calendar}
           />
 
@@ -192,21 +146,21 @@ export default function agendaNew() {
 
           </View>
           <View style={{ alignItems: 'center', backgroundColor: '#1C1C1C', width: wp('45%'), borderRadius: 5, padding: 7, marginTop: hp('1%'), marginRight: 10 }}>
-            <TextInput style={styles.textStyle} placeholder="Horário:" placeholderTextColor='#ffff' onChangeText={horario => setHorario(horario)} />
+            <TextInput style={styles.textStyle} placeholder="Horário:" placeholderTextColor='#ffff' autoFocus={false} returnKeyType="next" onSubmitEditing={() => ref_input2.current.focus()} onChangeText={horario => setHorario(horario)} />
 
           </View>
         </Frames>
 
         <Frames style={{ flexDirection: "row", justifyContent: 'space-between' }}>
           <View style={{ backgroundColor: '#1C1C1C', width: wp('95%'), borderRadius: 5, padding: 7, marginTop: hp('1%'), marginLeft: 10 }}>
-            <TextInput style={styles.textStyle} placeholder="Local:" placeholderTextColor='#ffff' onChangeText={local => setLocal(local)} />
+            <TextInput style={styles.textStyle} placeholder="Local:" placeholderTextColor='#ffff' returnKeyType="next" onSubmitEditing={() => ref_input3.current.focus()}  ref={ref_input2} onChangeText={local => setLocal(local)} />
 
           </View>
         </Frames>
 
         <Frames style={{ flexDirection: "row", justifyContent: 'space-between' }}>
           <View style={{ backgroundColor: '#1C1C1C', width: wp('95%'), borderRadius: 5, padding: 7, marginTop: hp('1%'), marginLeft: 10 }}>
-            <TextInput style={styles.textStyle} placeholder="Evento:" placeholderTextColor='#ffff' onChangeText={evento => setEvento(evento)} />
+            <TextInput style={styles.textStyle} placeholder="Evento:" placeholderTextColor='#ffff' returnKeyType="next" onSubmitEditing={() => ref_input4.current.focus()}  ref={ref_input3} onChangeText={evento => setEvento(evento)} />
 
           </View>
         </Frames>
@@ -217,14 +171,14 @@ export default function agendaNew() {
             width: wp('45%'), borderRadius: 5, padding: 7,
             marginTop: hp('1%'), marginLeft: 10
           }}>
-            <TextInput style={styles.textStyle} placeholder="Contato:" placeholderTextColor='#ffff' onChangeText={contato => setContato(contato)} />
+            <TextInput style={styles.textStyle} placeholder="Contato:" placeholderTextColor='#ffff' returnKeyType="next" onSubmitEditing={() => ref_input5.current.focus()}  ref={ref_input4} onChangeText={contato => setContato(contato)} />
 
           </View>
           <View style={{
             alignItems: 'center', backgroundColor: '#1C1C1C',
             width: wp('45%'), borderRadius: 5, padding: 7, marginTop: hp('1%'), marginRight: 10
           }}>
-            <TextInput style={styles.textStyle} placeholder="Responsável:" placeholderTextColor='#ffff' onChangeText={responsavel => setResponsavel(responsavel)} />
+            <TextInput style={styles.textStyle} placeholder="Responsável:" placeholderTextColor='#ffff' returnKeyType="next" onSubmitEditing={() => ref_input6.current.focus()}  ref={ref_input5} onChangeText={responsavel => setResponsavel(responsavel)} />
 
           </View>
         </Frames>
@@ -234,20 +188,10 @@ export default function agendaNew() {
             backgroundColor: '#1C1C1C', width: wp('50%'), borderRadius: 5,
             padding: 7, marginTop: hp('1%'), marginLeft: 10, alignItems: 'center'
           }}>
-            <TextInput style={styles.textStyle} placeholder="Valor:" placeholderTextColor='#ffff' onChangeText={valor => setValor(valor)} />
+            <TextInput style={styles.textStyle} placeholder="Valor:" placeholderTextColor='#ffff' ref={ref_input6} onChangeText={valor => setValor(valor)} />
 
           </View>
-        </Frames>
-
-        {/* <Frames style={{ flexDirection: "row", justifyContent: 'center' }}>
-        <View style={{
-          backgroundColor: 'transparent', width: wp('95%'), borderRadius: 5,
-          padding: 10, marginTop: hp('1%'), marginLeft: 10, alignItems: 'center'
-        }}>
-          <Text style={{ color: '#EEDD82', fontSize: 16, marginTop: hp('-2%') }}>Não esquecer a consumação e o som</Text>
-
-        </View>
-      </Frames> */}
+        </Frames>        
 
         <View style={{ backgroundColor: 'transparent', padding: 10, marginTop: hp('-16%'), alignItems: 'center' }}>
 
@@ -255,7 +199,7 @@ export default function agendaNew() {
 
         </View>
 
-        <TouchableOpacity onPress={tryLogin} style={{ padding: hp('2%'), marginTop: hp('15%'), marginLeft: hp('3%'), backgroundColor: '#000', width: wp('90%'), alignItems: 'center', borderRadius: hp('10%') }}>
+        <TouchableOpacity onPress={trySave} style={{ padding: hp('2%'), marginTop: hp('15%'), marginLeft: hp('3%'), backgroundColor: '#000', width: wp('90%'), alignItems: 'center', borderRadius: hp('10%') }}>
           <Text style={{ color: '#B8860B', fontSize: 22 }} >Marcar</Text>
         </TouchableOpacity>
 

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "3.5.2",
+    "@react-native-community/netinfo": "^8.3.0",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
@@ -16,6 +17,7 @@
     "expo": "~42.0.1",
     "expo-dev-client": "^0.6.3",
     "expo-status-bar": "~1.0.4",
+    "expo-updates": "~0.8.2",
     "file-system": "^2.2.2",
     "frames-react-native": "^1.1.2",
     "link": "^0.1.5",
@@ -42,8 +44,7 @@
     "react-redux": "^7.2.6",
     "sequelize": "^6.8.0",
     "sequelize-ssh-tunnel": "git+https://bitbucket.org/freshrealm/sequelize-ssh-tunnel.git",
-    "tunnel-ssh": "^4.1.6",
-    "expo-updates": "~0.8.2"
+    "tunnel-ssh": "^4.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
