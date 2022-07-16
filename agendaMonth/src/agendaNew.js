@@ -188,7 +188,7 @@ export default function agendaNew() {
             backgroundColor: '#1C1C1C', width: wp('50%'), borderRadius: 5,
             padding: 7, marginTop: hp('1%'), marginLeft: 10, alignItems: 'center'
           }}>
-            <TextInput style={styles.textStyle} placeholder="Valor:" placeholderTextColor='#ffff' ref={ref_input6} onChangeText={valor => setValor(valor)} />
+            <TextInput style={styles.textStyle} keyboardType="numeric" placeholder="Valor:" placeholderTextColor='#ffff' ref={ref_input6} onChangeText={valor => setValor(valor)} />
 
           </View>
         </Frames>        

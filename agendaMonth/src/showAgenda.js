@@ -137,21 +137,21 @@ export default function showAgenda({ navigation }) {
       <View style={styles.container}>       
 
         <View style={{marginTop: hp('0%')}}>
-          <ImageBackground source={require('../assets/MonthNova.jpg')} style={styles.imageView} />
+          <ImageBackground source={require('../assets/0N0A8202.jpg')} style={styles.imageView} />
         </View> 
 
         <View style={{width: wp('2%'), 
                       height: hp('2%'),
-                      marginTop: hp('-33%'),
-                      marginLeft: hp('-53%'),
+                      marginTop: hp('-45%'),
+                      marginLeft: hp('-55%'),
                       backgroundColor: netinfo.isConnected ? 'green' : 'red'}}>
         </View>       
 
-        <View style={{ backgroundColor: '#000', width: wp('95%'), height: hp('10%'), alignItems: 'center', borderRadius: 5, marginTop: hp('23%') }}>
+        <View style={{ backgroundColor: '#000', width: wp('95%'), height: hp('10%'), alignItems: 'center', borderRadius: 5, marginTop: hp('33%') }}>
           <Text style={{ color: '#B8860B', fontSize: hp('3%') }}>{mes}</Text>
           <Divider style={styles.dividerMesStyle} />
-          <Text style={{ color: '#B8860B', fontSize: hp('2%'), marginLeft: hp('-40%'), marginTop: hp('1%') }}>Total: {listValues.length}</Text>
-          <Text style={{ color: '#B8860B', fontSize: hp('2%'), marginLeft: hp('35%'), marginTop: hp('-3%') }}>Renda: {sumValue}</Text>
+          <Text style={{ color: '#B8860B', fontSize: hp('2%'), marginLeft: hp('-30%'), marginTop: hp('1%') }}>Total: {listValues.length}</Text>
+          <Text style={{ color: '#B8860B', fontSize: hp('2%'), marginLeft: hp('25%'), marginTop: hp('-3%') }}>Renda: {sumValue}</Text>
 
 
         </View>
@@ -159,9 +159,9 @@ export default function showAgenda({ navigation }) {
         <View style={{ flex: 1, width: wp('95%'), marginTop: hp('0%') }}>
           <ScrollView>
             <View style={{ backgroundColor: '#1C1C1C', padding: 10, margin: 5, borderRadius: 10, elevation: 1 }}>
-              {sortListValues.map(lista => (
-                <View style={{ paddingTop: 10 }}>
-                  <View style={{ flexDirection: 'row', }}>
+              {sortListValues.map((lista, index) => (
+                <View key={index} style={{ paddingTop: 10 }}>
+                  <View  style={{ flexDirection: 'row', }}>
 
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                       <Text style={{ height: 50, fontWeight: 'bold', fontSize: 40, color: '#fff', marginLeft: hp('2%') }}>{Moment(lista.data).format('DD')}</Text>
@@ -195,7 +195,7 @@ export default function showAgenda({ navigation }) {
     return (
       <View style={styles.container}>
         <View style={styles.container}>
-          <ImageBackground source={require('../assets/month_agua.jpeg')} style={styles.imageView} />
+          <ImageBackground source={require('../assets/0N0A8202.jpg')} style={styles.imageView} />
 
           <View style={{ backgroundColor: '#000', width: wp('95%'), alignItems: 'center', borderRadius: 5, marginTop: hp('-3%') }}>
             <Text style={{ color: '#B8860B', fontSize: 18 }}>{mes}</Text>
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   imageView: {
     width: wp('100%'),
-    height: hp('35%'),
+    height: hp('45%'),
     marginTop: hp('4%')
 
   },

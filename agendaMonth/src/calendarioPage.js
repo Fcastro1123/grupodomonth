@@ -56,8 +56,8 @@ export default function calendarioPage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.container}>
-        <ImageBackground source={require('../assets/MonthNova.jpg')} style={styles.imageView} />
+      <View style={styles.imageView}>
+        <ImageBackground source={require('../assets/0N0A8202.jpg')} style={styles.imageView} />
       </View>
 
       <View style={styles.calendarView}>
@@ -78,9 +78,9 @@ export default function calendarioPage({ navigation }) {
         />
 
         {dateFilter != undefined && dateFilter.length > 0 ?
-          dateFilter.map((lista) => (
+          dateFilter.map((lista, index) => (
             <>
-              <View style={{ backgroundColor: '#D3D3D3', width: wp('90%'), height: hp('5%'), borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginTop: hp('1%') }}>
+              <View key={index} style={{ backgroundColor: '#D3D3D3', width: wp('90%'), height: hp('5%'), borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginTop: hp('1%') }}>
                 <Text style={{ fontSize: 16 }}>{Moment(lista.data).format('DD/MM')} - {lista.local} - {lista.horario}</Text>
               </View>
             </>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     width: wp('97%'),
     borderRadius: 20,
-    marginTop: hp('-33%')
+    marginTop: hp('-10%')
   },
   calendar: {
     width: wp('97%'),
@@ -137,9 +137,10 @@ const styles = StyleSheet.create({
 
   },
   imageView: {
+    justifyContent: 'flex-start',
     width: wp('100%'),
-    height: hp('35%'),
-    marginTop: hp('4%')
+    height: hp('45%'),
+    marginTop: hp('2%')
 
   },
 

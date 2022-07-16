@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "agendaMonth",
+    "slug": "agendaMonth",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/pandeiro_gold.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splashMonth.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.grupodomonth.agenda",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/pandeiro_gold.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/pandeiro_gold.png"
+    }
+  }
+}
