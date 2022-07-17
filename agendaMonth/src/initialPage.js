@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import showAgenda from '../src/showAgenda';
 import agendaNew from '../src/agendaNew';
 import calendarioPage from '../src/calendarioPage';
-import agendaManual from '../src/agendaManual';
 
 
 const { width, height } = Dimensions.get('window');
@@ -69,23 +68,7 @@ const InitialPage = ({ route, navigation }) => {
                         <Text style={{color: focused ? 'black' : 'lightgray', fontSize: 12}}>Calendário</Text>
                     </View>
                 )  }} />
-                {/* <Tab.Screen name="Manual" component={agendaManual} options={{ headerShown: false, 
-                tabBarIcon:({focused}) => (
-                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                        <ImageBackground 
-                        source={require('../assets/iconMarcadas.png')}
-                        resizeMode='contain'
-                        style={{
-                            width: 25,
-                            height: 25,
-                            color: focused ? '#e32f45' : 'lightgray',
-                            opacity: focused ? 1 : 0.3
-                            
-                        }}
-                        />
-                        <Text style={{color: focused ? 'black' : 'lightgray', fontSize: 12}}>Manual</Text>
-                    </View>
-                )  }} /> */}
+                
                 <Tab.Screen name="Marcar" component={agendaNew} options={{ headerShown: false, 
                 tabBarIcon:({focused}) => (
                     <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -103,6 +86,8 @@ const InitialPage = ({ route, navigation }) => {
                         <Text style={{color: focused ? 'black' : 'lightgray', fontSize: 12}}>Marcar</Text>
                     </View>
                 ) }} />
+
+               
             </Tab.Navigator>
         )    
 }
